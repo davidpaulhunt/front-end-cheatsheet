@@ -15,6 +15,18 @@ window.onload = function() {
   document.body.appendChild(heading);
 }
 ```
+### Tying elemnts together with user input
+BLUF: Take user input and use it to respond, label, etc.
+```
+# the script
+function setStyle(ele) {
+  var color = document.getElementById("colorButton").value;
+  ele.style.background = color;
+}
+# example usage
+<input placeholder="type a color..." type="text" id="colorButton">
+<button onclick="setStyle(this);">Submit</button>
+```
 ### Using onChange to Manipulate the DOM
 
 ```
