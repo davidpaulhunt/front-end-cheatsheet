@@ -15,7 +15,7 @@ window.onload = function() {
   document.body.appendChild(heading);
 }
 ```
-### Tying elemnts together with user input
+### Tying elements together with user input
 BLUF: Take user input and use it to respond, label, etc.
 ```
 # the script
@@ -46,6 +46,40 @@ function setBodyAttr(attr, value) {
     </select>
   </form>
 </div>
+```
+### Get the user's current location
+```
+function geoFindMe() {
+  # get an html target destiation
+  var output = document.getElementById("out");
+  # if the browser doesn't support the geolocation API
+  if (!navigator.geolocation) {
+    output.innerHTML = "<p>Geolocation is not supported by your browser.</p>"
+    return;
+  }
+  # if successful, post to screen
+  function success(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    output.innerHTML = '<p>Latitude is ' + latitude + ' and longitude is ' + longitude + '</p>';
+
+    var img = new Image();
+    # build a google maps rendering
+    img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+    # put the map on the screen
+    output.appendChild(img);
+
+  }
+  # error callback
+  function error() {
+    output.innerHTML = "Unable to retrieve your location.";
+  }
+
+  output.innerHTML = "Locating...";
+
+  navigator.geolocation.getCurrentPosition(success, error);
+}
 ```
 ### Credits
 Mozilla Developer's Network
